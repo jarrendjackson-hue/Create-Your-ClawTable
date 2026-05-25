@@ -1,0 +1,18 @@
+# Core
+pyyaml>=6.0
+
+# YouTube + podcast transcription
+yt-dlp>=2024.1.1
+faster-whisper>=1.0.0
+
+# Books
+pypdf>=4.0.0
+ebooklib>=0.18
+beautifulsoup4>=4.12.0
+
+# Podcasts
+feedparser>=6.0.10
+
+# Articles
+requests>=2.31.0
+trafilatura>=1.6.0

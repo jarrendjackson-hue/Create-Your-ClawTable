@@ -1,0 +1,37 @@
+# Generated source packs (raw transcripts, book chunks) — too large to ship
+source-packs/*/
+!source-packs/.gitkeep
+
+# Generated build prompts and dist bundles — user-specific
+build-prompts/*.md
+!build-prompts/.gitkeep
+dist/*.md
+!dist/.gitkeep
+
+# User-uploaded source material
+books/*
+!books/.gitkeep
+
+# User-generated seats (these are personal — ignore by default,
+# users can `git add -f` if they want to share their table)
+seats/*.md
+!seats/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Whisper model cache (large)
+.whisper_cache/
+
+# Editor
+.vscode/
+.idea/

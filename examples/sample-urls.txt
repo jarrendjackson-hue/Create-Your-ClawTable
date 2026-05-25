@@ -1,0 +1,5 @@
+# One URL per line. Lines starting with # are ignored.
+# Example: a Paul Graham essay list
+http://paulgraham.com/ds.html
+http://paulgraham.com/mit.html
+http://paulgraham.com/wealth.html
