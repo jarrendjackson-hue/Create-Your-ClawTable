@@ -133,6 +133,8 @@ This repo is the public, do-it-yourself version. Type in who *you* want at your 
 
 A pre-built starter pack of ten curated seats (Hormozi, Munger, YC, Saraev, Kennedy, Brunson, and more) lives at [Jarrens-ClawTable](https://github.com/jarrendjackson-hue/Jarrens-ClawTable). Fork that if you want a working table in 60 seconds. Use *this* repo to build your own.
 
+If you only want a YouTube transcript tool — not the full strategy table — check out the standalone companion: **[Watch-YouTube](https://github.com/jarrendjackson-hue/Watch-YouTube)**. `pip install` it and you get a `watch-youtube` CLI that turns URLs/channels/searches into clean transcripts.
+
 ---
 
 ## FAQ
