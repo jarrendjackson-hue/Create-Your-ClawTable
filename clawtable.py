@@ -28,12 +28,16 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from lib import articles, books, podcasts, seat, wizard, youtube  # noqa: E402
+from lib import articles, books, podcasts, preflight, seat, wizard, youtube  # noqa: E402
 from lib.util import log, slugify  # noqa: E402
 
 
 def cmd_init(args: argparse.Namespace) -> None:
     wizard.run()
+
+
+def cmd_doctor(args: argparse.Namespace) -> int:
+    return preflight.doctor()
 
 
 def cmd_add_youtube(args: argparse.Namespace) -> None:
@@ -87,6 +91,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     it = sub.add_parser("init", help="Interactive wizard — set up your first table from scratch")
     it.set_defaults(func=cmd_init)
+
+    dr = sub.add_parser("doctor", help="Detect your OS + check what's installed; print OS-specific install commands")
+    dr.set_defaults(func=cmd_doctor)
 
     yt = sub.add_parser("add-youtube", help="Harvest from a YouTube channel or search")
     yt.add_argument("name_or_query", help="Channel name, @handle, URL, or free-text search")

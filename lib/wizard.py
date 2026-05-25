@@ -14,7 +14,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from . import articles, books, podcasts, seat, youtube
+from . import articles, books, podcasts, preflight, seat, youtube
 from .util import ROOT, log, slugify
 
 
@@ -40,6 +40,21 @@ SOURCE_CHOICES = {
 def run() -> None:
     print(BANNER)
     print("This wizard will help you stand up your first ClawTable.\n")
+
+    # Step 0 — preflight: detect OS + installed deps + offer to install missing
+    print("Step 0 — checking what's installed on your machine\n")
+    checks = preflight.run_checks()
+    _, missing = preflight.print_report(checks)
+    if missing:
+        if sys.stdin.isatty() and preflight.offer_pip_install():
+            # Re-run checks after install
+            print()
+            checks = preflight.run_checks()
+            _, missing = preflight.print_report(checks)
+        if missing:
+            print("Some pieces are still missing. That's OK — the wizard will skip source types")
+            print("you don't have deps for. Install the rest later and re-run if you want them.\n")
+    print()
 
     names = _ask_names()
     if not names:

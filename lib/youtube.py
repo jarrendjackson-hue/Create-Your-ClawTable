@@ -129,6 +129,7 @@ def _try_captions(yt: str, url: str, pack: Path, vid: str) -> str | None:
 
 
 def _vtt_to_text(vtt: str) -> str:
+    import html
     lines = []
     for line in vtt.splitlines():
         s = line.strip()
@@ -136,8 +137,8 @@ def _vtt_to_text(vtt: str) -> str:
             continue
         if "-->" in s or s.isdigit():
             continue
-        # strip caption tags like <c> and <00:00:00.000>
-        s = _strip_tags(s)
+        # strip caption tags like <c> and <00:00:00.000>, then decode entities
+        s = html.unescape(_strip_tags(s))
         if s and (not lines or lines[-1] != s):
             lines.append(s)
     return "\n".join(lines)
@@ -149,6 +150,12 @@ def _strip_tags(s: str) -> str:
 
 
 def _whisper_transcribe(yt: str, url: str, audio_dir: Path, vid: str) -> str | None:
+    if not _which("ffmpeg"):
+        log("ffmpeg not found — required for Whisper fallback on caption-less videos.")
+        log("install: brew install ffmpeg  (mac) | apt install ffmpeg (linux) | ffmpeg.org/download (win)")
+        log("skipping whisper for this video. captions-only videos will still work.")
+        return None
+
     audio_path = audio_dir / f"{vid}.m4a"
     if not audio_path.exists():
         cmd = [
@@ -171,6 +178,7 @@ def _whisper_transcribe(yt: str, url: str, audio_dir: Path, vid: str) -> str | N
     except SystemExit:
         return None
 
+    log("loading whisper model (one-time ~150MB download on first run)…")
     model = fw.WhisperModel("base", device="cpu", compute_type="int8")
     segments, _ = model.transcribe(str(audio_path), beam_size=1)
     return "\n".join(seg.text.strip() for seg in segments if seg.text.strip())

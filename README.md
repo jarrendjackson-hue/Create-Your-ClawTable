@@ -20,12 +20,25 @@ Then you ask the table questions and watch them debate, pressure-test, and vote.
 
 ---
 
+## Install
+
+```bash
+git clone https://github.com/jarrendjackson-hue/Create-Your-ClawTable.git
+cd Create-Your-ClawTable
+pip install -r requirements.txt
+```
+
+That installs everything you need to harvest YouTube captions, books, podcasts, and articles. **One optional extra:** if you want clawtable to transcribe YouTube videos that don't have captions (Whisper fallback), you also need `ffmpeg` on your system:
+
+- macOS: `brew install ffmpeg`
+- Linux: `sudo apt install ffmpeg`
+- Windows: [ffmpeg.org/download](https://ffmpeg.org/download.html)
+
+Skip ffmpeg if you only plan to use channels with captions — most major YouTubers have them. The first time the Whisper fallback runs, it also downloads a ~150 MB model. That's a one-time cost.
+
 ## 60-second quickstart
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/clawtable.git
-cd clawtable
-pip install -r requirements.txt
 python clawtable.py init
 ```
 
@@ -118,7 +131,7 @@ I built a private version of this for myself — a round table of advisors I cou
 
 This repo is the public, do-it-yourself version. Type in who *you* want at your table.
 
-The private version is at [ClawTable Advisors] — this one is yours to remix.
+A pre-built starter pack of ten curated seats (Hormozi, Munger, YC, Saraev, Kennedy, Brunson, and more) lives at [Jarrens-ClawTable](https://github.com/jarrendjackson-hue/Jarrens-ClawTable). Fork that if you want a working table in 60 seconds. Use *this* repo to build your own.
 
 ---
 
