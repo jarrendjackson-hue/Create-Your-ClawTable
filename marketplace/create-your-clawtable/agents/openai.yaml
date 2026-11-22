@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create-Your-ClawTable"
+  short_description: "Build a source-grounded AI strategy roundtable"
+  default_prompt: "Use $create-your-clawtable to build an advisor roundtable from my chosen sources and pressure-test my idea."
